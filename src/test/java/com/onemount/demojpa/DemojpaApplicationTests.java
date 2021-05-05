@@ -79,9 +79,11 @@ class DemojpaApplicationTests {
 	@Test
 	@DisplayName("06. Delete Customer id = 4")
 	public void deleteCustomer(){
+		long count = customerRepository.count();
 		Optional<Customer> customer = customerRepository.findById(4L);
 		if (customer.isPresent()) {
 			customerRepository.delete(customer.get());
+			assertThat(customerRepository.count()).isEqualTo(count-1);
 		  }  
 	}
 
